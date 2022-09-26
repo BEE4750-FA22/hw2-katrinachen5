@@ -67,7 +67,7 @@ end
 #plot of DO concentrations
 using Plots
 x = LinRange(0,50,51);
-plot(x, c, title="DO Concentrations over 50 km", ylabel="Distance(km)", xlabel="DO Concentration(mg/L)", legend="DO concentration")
+plot(x, c, title="DO Concentrations over 50 km", ylabel="Distance(km)", xlabel="DO Concentration(mg/L)", label="DO concentration")
 
 ```
 
@@ -80,7 +80,7 @@ while c[dist] < 6
 end
 
 println(dist)
-println(C[dist])
+println(c[dist])
 ```
 
 ## Problem 1.3
