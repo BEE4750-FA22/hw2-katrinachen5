@@ -67,7 +67,7 @@ end
 #plot of DO concentrations
 using Plots
 x = LinRange(0,50,51);
-plot(x, c, title="DO Concentrations over 50 km", ylabel="Distance(km)", xlabel="DO Concentration(mg/L)", label="DO concentration")
+plot(x, c, title="DO Concentrations over 50 km", xlabel="Distance (km)", ylabel="DO Concentration (mg/L)", label="DO concentration")
 
 ```
 
@@ -98,21 +98,40 @@ function min(e_1, e_2, c_s, c_0, b_0, n_0, c_1, b_1, n_1, c_2, b_2, n_2, k_a, k_
   b_t1 = ((1000*100000*b_0) + (1000*10000*b_ts1)) / ((1000*100000) + (1000*10000))
   n_t1 = ((1000*100000*n_0) + (1000*10000*n_ts1)) / ((1000*100000) + (1000*10000))
 
+  #concentrations at x = 15km
+  c_15, b_15, n_15 = do_conc(c_s, c_t1, b_t1, n_t1, k_a, k_c, k_n, 15, u)
+
   #initial concentrations of source 2 with treatment
   c_ts2 = (1-(e_2/100)) * c_2
   b_ts2 = (1-(e_2/100)) * b_2
   n_ts2 = (1-(e_2/100)) * n_2
-
-  #concentrations at x = 15km
-  c_15, b_15, n_15 = do_conc(c_s, c_t1, b_t1, n_t1, k_a, k_c, k_n, 15, u)
 
   #initial concentrations at source 2 with treatment
   c_t2 = ((1000*110000*c_15) + (1000*15000*c_ts2)) / ((1000*110000) + (1000*15000))
   b_t2 = ((1000*110000*b_15) + (1000*15000*b_ts2)) / ((1000*110000) + (1000*15000))
   n_t2 = ((1000*110000*n_15) + (1000*15000*n_ts2)) / ((1000*110000) + (1000*15000))
 
-  
+  #finding min
+  min = 500
+  for x in 1:36
+    tc, tb, tn = do_conc(c_s, c_t2, b_t2, n_t2, k_a, k_c, k_n, x-1, u)
+    if tc<min
+      min = tc
+    end
+  end
+
+return min
 end
+
+#all treatments and initializing
+e_2 = 0:100;
+C = zeros(101);
+
+for n in 1:101
+  C[n] = min(0, e_2[n], 10, 7.5, 5, 5, 5, 50, 35, 5, 45, 35, 0.55, 0.35, 0.25, 6)
+end
+
+
 ```
 
 ## Problem 1.4
