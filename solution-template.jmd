@@ -160,9 +160,21 @@ println(e_2[i])
 ```
 
 ## Problem 1.5
-```julia
+From only the information I have, which are the concentrations and neeeded minimum treatment, I would probably opt to treat both waste streams equally.
+This is because the needed minimum to treat both waste streams equally is lower than treating just stream 2, as seen in Problem 1.3 and 1.4. 
 
-```
+
+However, it is hard to say because there are many factors that also need to be considered. 
+For example, I do not know if there are existing treatment plants at both waste streams. This could pose as a large fixed cost to build treatment plants. 
+Additionally, there is no information about treatment costs and I would like to know how much it would cost to treat both streams.
+With this information, I would chose the cheaper option.
+
+
+I could also try to look for alternatives.
+For example, I would look into varying the treatment of the two streams, depending on how concentrated the streams are. This could decrease cost if I decide to treat both streams.
+For cost purposes, I could also look into differrent treatment methods like we did in Assignment 1.
+I could also look into having the two streams deposit into a sigular treatment plant. This would be similar to treating both streams at the same efficiency, but only one treatment plant would be needed.
+However, there may be additioinal costs to redirect the streams and capacity issues since one plant would need to treat two streams. 
 
 ## Problem 1.6
 ```julia
