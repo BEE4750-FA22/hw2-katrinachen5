@@ -131,17 +131,31 @@ for n in 1:101
   C[n] = min(0, e_2[n], 10, 7.5, 5, 5, 5, 50, 35, 5, 45, 35, 0.55, 0.35, 0.25, 6)
 end
 
-e = 1;
-while C[e] < 4
-  e += 1
+i = 1;
+while C[i] < 4
+  i += 1
 end
 
-println(C[e])
-println(e_2[e])
+println(C[i])
+println(e_2[i])
 ```
 
 ## Problem 1.4
 ```julia
+e = 0:100;
+C = zeros(101);
+
+for n in 1:101
+  C[n] = min(e[n], e[n], 10, 7.5, 5, 5, 5, 50, 35, 5, 45, 35, 0.55, 0.35, 0.25, 6)
+end
+
+i = 1;
+while C[i] < 4
+  i += 1
+end
+
+println(C[i])
+println(e_2[i])
 
 ```
 
