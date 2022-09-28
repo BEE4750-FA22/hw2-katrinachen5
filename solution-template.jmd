@@ -222,8 +222,24 @@ function sample_correlated_uniform(n, a, b, corr_coef=0.7)
   return samples
 end
 ```
+
 ```julia
 
+correlated = sample_correlated_uniform(100, [4,7], [3,8]);
+
+C = zeros(100);
+for y in 1:100
+  C[y] = min(8, 8, 10, 7.5, correlated[y,1], correlated[y,2], 5, 50, 35, 5, 45, 35, 0.55, 0.35, 0.25, 6)
+end
+
+z = 0;
+for i in 1:100
+  if C[i] < 4
+    global z += 1
+  end
+end
+
+println(z)
 
 ```
 
