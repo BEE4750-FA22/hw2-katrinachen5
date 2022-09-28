@@ -131,13 +131,13 @@ for n in 1:101
   C[n] = min(0, e_2[n], 10, 7.5, 5, 5, 5, 50, 35, 5, 45, 35, 0.55, 0.35, 0.25, 6)
 end
 
-i = 1;
-while C[i] < 4
-  i += 1
+z = 1;
+while C[z] < 4
+  global z += 1
 end
 
-println(C[i])
-println(e_2[i])
+println(C[z])
+println(e_2[z])
 ```
 
 ## Problem 1.4
@@ -149,13 +149,13 @@ for n in 1:101
   C[n] = min(e[n], e[n], 10, 7.5, 5, 5, 5, 50, 35, 5, 45, 35, 0.55, 0.35, 0.25, 6)
 end
 
-i = 1;
-while C[i] < 4
-  i += 1
+z = 1;
+while C[z] < 4
+  global z += 1
 end
 
-println(C[i])
-println(e_2[i])
+println(C[z])
+println(e[z])
 
 ```
 
@@ -178,6 +178,28 @@ However, there may be additioinal costs to redirect the streams and capacity iss
 
 ## Problem 1.6
 ```julia
+using Distributions
+
+b_r= zeros(100);
+n_r= zeros(100);
+for x in 1:100
+  b_r[x]= rand(Uniform(4,7));
+  n_r[x]= rand(Uniform(3,8));
+end
+
+C = zeros(100);
+for y in 1:100
+  C[y] = min(8, 8, 10, 7.5, b_r[y], n_r[y], 5, 50, 35, 5, 45, 35, 0.55, 0.35, 0.25, 6)
+end
+
+z = 0;
+for i in 1:100
+  if C[i] < 4
+    global z += 1
+  end
+end
+
+println(z)
 
 ```
 
@@ -202,6 +224,7 @@ end
 ```
 ```julia
 
+
 ```
 
 ## Problem 1.8
@@ -210,3 +233,6 @@ end
 ```
 
 # References
+https://docs.julialang.org/en/v1/manual/variables-and-scoping/
+http://juliastats.org/Distributions.jl/stable/univariate/#univariates
+
