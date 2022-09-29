@@ -79,7 +79,20 @@ while c[dist] < 6
   global dist += 1
 end
 
-println(dist)
+dist_2 = dist - 15; 
+
+println(dist_2)
+println(c[dist])
+
+```
+
+The distance (km) from waste stream 2 for the DO concentration of the river to recover to 6 mg/L is 
+```julia
+println(dist_2)
+```
+
+The concentration (mg/L) at that distance is 
+```julia
 println(c[dist])
 ```
 
@@ -136,7 +149,13 @@ while C[z] < 4
   global z += 1
 end
 
-println(C[z])
+
+round(C[z])
+println(e_2[z])
+```
+
+The minimum level of treatment for waste stream 2 to achieve the 4 mg/L regulation is 
+```julia
 println(e_2[z])
 ```
 
@@ -154,14 +173,21 @@ while C[z] < 4
   global z += 1
 end
 
-println(C[z])
+round(C[z])
 println(e[z])
 
 ```
 
+The minimum level of equal treatment for both waste streams to achieve the 4 mg/L regulation is 
+```julia
+println(e[z])
+```
+
+
+
 ## Problem 1.5
 From only the information I have, which are the concentrations and neeeded minimum treatment, I would probably opt to treat both waste streams equally.
-This is because the needed minimum to treat both waste streams equally is lower than treating just stream 2, as seen in Problem 1.3 and 1.4. 
+This is because the needed minimum level of treatment for both waste streams equally is lower than that of just treating just stream 2, as seen in Problem 1.3 and 1.4. 
 
 
 However, it is hard to say because there are many factors that also need to be considered. 
@@ -180,27 +206,33 @@ However, there may be additioinal costs to redirect the streams and capacity iss
 ```julia
 using Distributions
 
-b_r= zeros(100);
-n_r= zeros(100);
-for x in 1:100
+b_r= zeros(1000);
+n_r= zeros(1000);
+for x in 1:1000
   b_r[x]= rand(Uniform(4,7));
   n_r[x]= rand(Uniform(3,8));
 end
 
-C = zeros(100);
-for y in 1:100
+C = zeros(1000);
+for y in 1:1000
   C[y] = min(8, 8, 10, 7.5, b_r[y], n_r[y], 5, 50, 35, 5, 45, 35, 0.55, 0.35, 0.25, 6)
 end
 
 z = 0;
-for i in 1:100
+for i in 1:1000
   if C[i] < 4
     global z += 1
   end
 end
 
-println(z)
+p=z/1000*100;
 
+println(p)
+```
+
+The probability that treating both waste streams equally would fail to keep the DO concentration above 4 mg/L is
+```julia
+println(p)
 ```
 
 ## Problem 1.7
@@ -227,23 +259,35 @@ end
 
 correlated = sample_correlated_uniform(100, [4,7], [3,8]);
 
-C = zeros(100);
-for y in 1:100
+C = zeros(1000);
+for y in 1:1000
   C[y] = min(8, 8, 10, 7.5, correlated[y,1], correlated[y,2], 5, 50, 35, 5, 45, 35, 0.55, 0.35, 0.25, 6)
 end
 
 z = 0;
-for i in 1:100
+for i in 1:1000
   if C[i] < 4
     global z += 1
   end
 end
 
-println(z)
+pc = z/1000*100; 
 
+println(pc)
+```
+
+The probability that treating both waste streams equally would fail to keep the DO concentration above 4 mg/L is
+```julia
+println(pc)
 ```
 
 ## Problem 1.8
+The presence of uncertainty and dependence between variables seemed to greatly increase the probability that DO concentration would fail to stay above 4 mg/L.
+Because of this, I would not stick with the same strategy as I did in Problem 1.5. I would recommend to treat both waste streams at a higher level of efficiency than 8%.
+As mentioned in Problem 1.5, another variable to consider would be treating the streams at different efficiencies based on their concentrations.
+Their concentrations can vary due do differenct activities or different times of the year.
+Additionally, another variable to consider is cost. Increasing the treatment efficiency will very likely increase the cost. 
+Because of this, when picking an efficiency, I will need to make sure that the cost is reasonable.
 
 
 ```
